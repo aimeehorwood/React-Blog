@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [author, setAuthor] = useState('mary');
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [author, setAuthor] = useState("mary");
   const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
 
@@ -15,23 +15,23 @@ const Create = () => {
     setIsPending(true);
 
     fetch("http://localhost:8000/blogs/", {
-      method: 'POST',
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(blog)
+      body: JSON.stringify(blog),
     }).then(() => {
-        setIsPending(false);
-        navigate("/")
-    })
-  }
+      setIsPending(false);
+      navigate("/");
+    });
+  };
 
   return (
     <div className="create">
       <h2>Add a New Blog</h2>
       <form onSubmit={handleSubmit}>
         <label>Blog title:</label>
-        <input 
-          type="text" 
-          required 
+        <input
+          type="text"
+          required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -42,10 +42,7 @@ const Create = () => {
           onChange={(e) => setBody(e.target.value)}
         ></textarea>
         <label>Blog author:</label>
-        <select
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        >
+        <select value={author} onChange={(e) => setAuthor(e.target.value)}>
           <option value="mary">mary</option>
           <option value="zara">zara</option>
         </select>
@@ -54,6 +51,6 @@ const Create = () => {
       </form>
     </div>
   );
-}
- 
+};
+
 export default Create;
